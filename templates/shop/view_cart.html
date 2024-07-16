@@ -1,0 +1,60 @@
+{% extends 'shop/user_index.html' %}
+{% block body %}
+<style>
+    .cart-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .cart-header h1 {
+        font-size: 2em;
+    }
+    .cart-details, .customer-details {
+        margin: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 16px;
+        background-color: #f9f9f9;
+    }
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+</style>
+
+<body>
+    <div class="cart-header">
+        <h1>Your Cart</h1>
+    </div>
+
+    <div class="customer-details">
+        <h2>Customer Details</h2>
+        <p>Name: {{ customer.name }}</p>
+        <p>Mobile Number: {{ customer.mobile_number }}</p>
+    </div>
+
+    <div class="cart-details">
+        <h2>Cart Items</h2>
+        {% for order in orders %}
+            <div class="cart-item">
+                <div>
+                    <h3>{{ order.product.name }}</h3>
+                    <p>Variant: {{ order.variant.description }}</p>
+                    <p>Quantity: {{ order.qty }}</p>
+                    <p>Price: ${{ order.price }}</p>
+                </div>
+                <div>
+{#                   #}
+                </div>
+            </div>
+        {% empty %}
+            <p>Your cart is empty.</p>
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}
